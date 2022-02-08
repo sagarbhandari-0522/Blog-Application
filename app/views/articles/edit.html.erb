@@ -1,21 +1,2 @@
-<% if @article.errors%>
-    <% @article.errors.full_messages.each  do |error|%>
-    <%= error %>
-    <% end %>
-<% end %>
-
 <h1>Edit Article </h1>
-<%= form_with model: @article do |form| %>
-    <div>
-        <%= form.label :title%> <br>
-        <%= form.text_field :title%>
-    </div>
-    <div>
-        <%= form.label :description%><br>
-        <%= form.text_area :description%>
-    </div>
-    <div>
-        <%= form.submit "Update Article", data: {turbo: false}%>
-    </div>
-
-<% end %>
+<%= render "form", a: "Edit Article", article: @article %>

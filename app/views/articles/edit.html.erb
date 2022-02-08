@@ -1,10 +1,10 @@
-<% if @article.errors.any? %>
+<% if @article.errors%>
     <% @article.errors.full_messages.each  do |error|%>
     <%= error %>
     <% end %>
 <% end %>
 
-<h1>New Article</h1>
+<h1>Edit Article </h1>
 <%= form_with model: @article do |form| %>
     <div>
         <%= form.label :title%> <br>
@@ -15,7 +15,7 @@
         <%= form.text_area :description%>
     </div>
     <div>
-        <%= form.submit "Create New Article", data: {turbo: false}%>
+        <%= form.submit "Update Article", data: {turbo: false}%>
     </div>
 
 <% end %>

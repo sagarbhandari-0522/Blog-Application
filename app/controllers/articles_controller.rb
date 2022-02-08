@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  before_action :find_article, only: [:show]
+  before_action :find_article, only: %i[show edit destroy]
   def index
     @articles = Article.all
   end
@@ -13,20 +13,33 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    article = Article.new(article_params)
-    if article.save
-      article.save
+    @article = Article.new(article_params)
+    if @article.save
+      @article.save
       redirect_to articles_path
     else
       render 'new'
     end
   end
 
-  def delete; end
+  def edit
+    render 'edit'
+  end
 
-  def edit; end
+  def update
+    @article = Article.new(article_params)
+    if @article.save
+      @article.save
+      redirect_to articles_path
+    else
+      redirect_to 'edit'
+    end
+  end
 
-  def update; end
+  def destroy
+    @article.destroy
+    redirect_to articles_path, status: :see_other
+  end
 
   private
 

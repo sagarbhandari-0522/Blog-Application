@@ -1,0 +1,7 @@
+<%if @article.present? %>
+<h1> <%= @article.title %></h1>
+<p> <%= @article.description%></p>
+<% else %>
+Article not found
+<%end%>
+<%= link_to 'Back',articles_path %>

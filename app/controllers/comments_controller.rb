@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :find_article, only: %i[create destroy edit update]
   before_action :find_comment, only: %i[edit destroy update]
-
+  before_action :authenticate_user!
   def create
     @comment = @article.comments.new(comment_params)
     if @comment.save

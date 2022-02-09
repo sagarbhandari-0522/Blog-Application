@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :find_article, only: %i[create destroy]
-  before_action :find_comment, only: %i[destroy]
+  before_action :find_article, only: %i[create destroy edit update]
+  before_action :find_comment, only: %i[edit destroy update]
 
   def create
     @comment = @article.comments.new(comment_params)
@@ -9,6 +9,18 @@ class CommentsController < ApplicationController
       redirect_to article_path(@article)
     else
       puts '*' * 50
+      render 'articles/show'
+    end
+  end
+
+  def edit
+    render 'articles/show'
+  end
+
+  def update
+    if @comment.update(comment_params)
+      redirect_to article_path(@article)
+    else
       render 'articles/show'
     end
   end

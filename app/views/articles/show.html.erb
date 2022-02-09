@@ -6,6 +6,35 @@ Article not found
 <%end%>
 <%= link_to 'Back',articles_path %>
 <%= link_to 'Edit',edit_article_path(@article)%>
-<%= link_to 'Delete Article', article_path(@article), data:{
-                turbo_method: :delete,
-                turbo_confirm: "Are you sure?"} %>
+<%= link_to 'Delete Article', article_path(@article), data:{turbo_method: :delete }%>
+<h5>Comments</h5>
+<% @article.comments.all.each do |comment|%>
+  <strong><%= comment.commentor%></strong>
+    <%= comment.body%>
+    <%= link_to 'Delete', [@article, comment], data: {turbo_method: :delete}%><br>
+<%end%>
+
+
+
+<h5>Create Comment </h5>
+
+<% if @comment.errors.any?%>
+  <% @comment.errors.full_messages.each do |message|%>
+  <%= message%><br>
+<% end %>
+<% end %>
+
+<%= form_with model:[@article, @comment] do |form| %>
+  <p>
+    <%= form.label :commentor %><br>
+    <%= form.text_field :commentor %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit data: { turbo:false } %>
+  </p>
+<% end %>
+<%= link_to 'Back To Home', articles_path %>

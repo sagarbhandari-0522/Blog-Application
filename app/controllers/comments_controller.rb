@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     @comment = @article.comments.new(comment_params)
+    @comment.user_id = current_user.id
     if @comment.save
       redirect_to article_path(@article)
     else
@@ -17,6 +18,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comment.user_id = current_user.id
     if @comment.update(comment_params)
       redirect_to article_path(@article)
     else

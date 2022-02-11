@@ -17,6 +17,9 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = current_user.id
+    byebug
+
     if @article.save
       @article.save
       redirect_to article_path(@article)
@@ -30,6 +33,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    @article.user_id = current_user.id
     if @article.update(article_params)
       redirect_to article_path(@article)
     else

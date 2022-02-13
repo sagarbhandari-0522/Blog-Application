@@ -18,7 +18,6 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-    byebug
 
     if @article.save
       @article.save
@@ -34,6 +33,8 @@ class ArticlesController < ApplicationController
 
   def update
     @article.user_id = current_user.id
+    authorize @article
+
     if @article.update(article_params)
       redirect_to article_path(@article)
     else
@@ -43,6 +44,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
+    authorize @article
     redirect_to articles_path, status: :see_other
   end
 

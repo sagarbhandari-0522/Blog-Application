@@ -5,8 +5,8 @@
 Article not found
 <%end%>
 <%= link_to 'Back',articles_path %>
-<%= link_to 'Edit',edit_article_path(@article)%>
-<%= link_to 'Delete Article', article_path(@article), data:{turbo_method: :delete }%>
+<%= link_to 'Edit',edit_article_path(@article) if policy(@article).edit?%>
+<%= link_to 'Delete Article', article_path(@article), data:{turbo_method: :delete } if policy(@article).destroy?%>
 <h5>Comments</h5>
 <% @article.comments.all.each do |comment|%>
   <strong><%= comment.commentor%></strong>

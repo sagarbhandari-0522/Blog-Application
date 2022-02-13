@@ -28,6 +28,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    authorize @article
     render 'edit'
   end
 

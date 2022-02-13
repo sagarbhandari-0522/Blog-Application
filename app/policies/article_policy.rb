@@ -2,6 +2,7 @@ class ArticlePolicy < ApplicationPolicy
   attr_reader :user, :article
 
   def initialize(user, article)
+    super
     @user = user
     @article = article
   end

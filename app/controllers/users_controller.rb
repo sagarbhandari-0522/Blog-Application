@@ -4,12 +4,16 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    authorize @users
   end
 
-  def edit; end
+  def edit
+    authorize @user
+  end
 
   def update
     if @user.update(user_params)
+      authorize @user
       redirect_to users_path
     else
       render :edit, status: :unprocessable_entity
@@ -18,6 +22,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+    authorize @user
+
     redirect_to users_path
   end
 

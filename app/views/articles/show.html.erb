@@ -1,3 +1,4 @@
+
 <%if @article.present? %>
 <h1> <%= @article.title %></h1>
 <p> <%= @article.description%></p>
@@ -8,32 +9,9 @@ Article not found
 <%= link_to 'Edit',edit_article_path(@article) if policy(@article).edit?%>
 <%= link_to 'Delete Article', article_path(@article), data:{turbo_method: :delete } if policy(@article).destroy?%>
 <h5>Comments</h5>
-<% @article.comments.all.each do |comment|%>
-  <strong><%= comment.commentor%></strong>
-    <%= comment.body%>
-    <%= link_to 'Edit', edit_article_comment_path(@article,comment) if policy(comment).edit?%>
-    <%= link_to 'Delete', [@article, comment], data: {turbo_method: :delete} if policy(comment).destroy? %><br>
-<%end%>
+<%= render "comments/new_comment"%>
 
 <h5>Create Comment </h5>
+<%= render "comments/show_comment"%>
 
-<% if @comment.errors.any?%>
-  <% @comment.errors.full_messages.each do |message|%>
-  <%= message%><br>
-<% end %>
-<% end %>
-
-<%= form_with model:[@article, @comment] do |form| %>
-  <p>
-    <%= form.label :commentor %><br>
-    <%= form.text_field :commentor %>
-  </p>
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit data: { turbo:false } %>
-  </p>
-<% end %>
 <%= link_to 'Back To Home', articles_path %>

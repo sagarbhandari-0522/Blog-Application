@@ -14,11 +14,13 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    authorize @comment
     render 'articles/show'
   end
 
   def update
     @comment.user_id = current_user.id
+    authorize @comment
     if @comment.update(comment_params)
       redirect_to article_path(@article)
     else
@@ -28,6 +30,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
+    authorize @comment
     redirect_to article_path(@article), status: :see_other
   end
 

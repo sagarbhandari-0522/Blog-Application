@@ -11,8 +11,8 @@ Article not found
 <% @article.comments.all.each do |comment|%>
   <strong><%= comment.commentor%></strong>
     <%= comment.body%>
-    <%= link_to 'Edit', edit_article_comment_path(@article,comment)%>
-    <%= link_to 'Delete', [@article, comment], data: {turbo_method: :delete}%><br>
+    <%= link_to 'Edit', edit_article_comment_path(@article,comment) if policy(comment).edit?%>
+    <%= link_to 'Delete', [@article, comment], data: {turbo_method: :delete} if policy(comment).destroy? %><br>
 <%end%>
 
 <h5>Create Comment </h5>

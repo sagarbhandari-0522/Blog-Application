@@ -52,7 +52,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :description)
+    params.require(:article).permit(:title, :description, :header_image, uploads: [])
   end
 
   def find_article

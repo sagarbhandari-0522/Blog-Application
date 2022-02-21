@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :find_article, only: %i[create destroy edit update]
   before_action :find_comment, only: %i[edit destroy update]

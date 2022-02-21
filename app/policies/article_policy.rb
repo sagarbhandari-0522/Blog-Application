@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlePolicy < ApplicationPolicy
   attr_reader :user, :article
 

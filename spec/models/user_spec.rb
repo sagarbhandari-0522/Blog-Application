@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
   it 'email uniqueness' do
     user = User.new(email: current_user.email, password: 'Password')
     expect(user).to_not be_valid
-    user.email = 'sandhya@gmail.com'
+    user.email = 'sandhesh@gmail.com'
     expect(user).to be_valid
   end
 end

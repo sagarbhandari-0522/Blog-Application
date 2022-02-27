@@ -1,7 +1,7 @@
 require 'rails_helper'
-user = User.first
 
 RSpec.describe Article, type: :model do
+  let(:user) { create(:user) }
   it 'Title Presence' do
     article = Article.new(title: '', description: 'lorem dfjfjkl djlakdfjla', user: user)
     expect(article).to_not be_valid

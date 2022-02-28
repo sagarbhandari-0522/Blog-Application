@@ -1,8 +1,8 @@
 <h1>Edit User Role </h1>
 <%= form_with model: @user do |form| %>
-  <div>
-  <%= form.label :role_ids, "User roles" %>
-    <%= form.collection_check_boxes(:role_ids, Role.all, :id, :name) %>
-  </div>
-  <%= form.submit data:{turbo:false}%>
+	<div>
+		<%= form.label :role_ids, "User roles" %>
+		<%= form.collection_check_boxes(:role_ids, Role.all, :id, :name) %>
+	</div>
+	<%= form.submit data:{turbo:false}%>
 <% end %>

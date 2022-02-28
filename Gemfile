@@ -7,6 +7,7 @@ gem 'bootstrap', '~> 5.1.3'
 ruby '3.0.0'
 gem 'byebug', '~> 11.1', '>= 11.1.3'
 gem 'devise', '~> 4.8', '>= 4.8.1'
+gem 'htmlbeautifier', '~> 1.3', '>= 1.3.1'
 gem 'pundit', '~> 2.2'
 gem 'rolify', '~> 6.0'
 

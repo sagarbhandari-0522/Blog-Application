@@ -9,8 +9,8 @@ gem 'byebug', '~> 11.1', '>= 11.1.3'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'htmlbeautifier', '~> 1.3', '>= 1.3.1'
 gem 'pundit', '~> 2.2'
+gem 'rails-controller-testing'
 gem 'rolify', '~> 6.0'
-
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.1'
 

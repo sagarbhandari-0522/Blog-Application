@@ -22,16 +22,14 @@ RSpec.describe 'Articles', type: :request do
       expect { get article_path(100) }.to raise_error(ActiveRecord::RecordNotFound)
     end
     it 'should show articles ' do
-      create(:article, user: user)
-      article1 = Article.first
-      get article_path(article1)
+      article_params attributes_for(:article)
+      get article_path(Article.first)
       expect(response).to have_http_status(200)
     end
   end
   describe 'POST/create' do
     it 'should create article' do
-      article = attributes_for(:article)
-      post articles_path, params: { article: article }
+      article_params(attributes_for(:article))
       expect(response).to have_http_status(302)
     end
     it 'shouldnot  create article with empty title' do

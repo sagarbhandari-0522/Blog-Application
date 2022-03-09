@@ -1,0 +1,19 @@
+
+<% if @comment.errors.any?%>
+  <% @comment.errors.full_messages.each do |message|%>
+  <%= message%><br>
+<% end %>
+<% end %>
+
+<%= form_with model:[@article, @comment] do |form| %>
+  <%= form.hidden_field :commentor, value:(current_user.first_name) %>
+
+  
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit data: { turbo:false } %>
+  </p>
+<% end %>

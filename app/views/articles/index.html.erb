@@ -6,5 +6,7 @@
    <%= link_to 'show', article_path(article) %></p>
 </li>
 <% end %>
+<% if user_signed_in?%>
 <%= link_to 'New Article',new_article_path  %>
+<%end %>
 </ul>

@@ -1,0 +1,9 @@
+<% @article.comments.all.each do |comment|%>
+    <% if user_signed_in? %>
+
+  <strong><%= comment.commentor%></strong>
+    <%= comment.body%>
+    <%= link_to 'Edit', edit_article_comment_path(@article,comment) if policy(comment).edit?%>
+    <%= link_to 'Delete', [@article, comment], data: {turbo_method: :delete} if policy(comment).destroy? %><br>
+    <% end %>
+<%end%>

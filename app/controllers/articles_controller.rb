@@ -2,11 +2,14 @@
 
 class ArticlesController < ApplicationController
   before_action :find_article, only: %i[show edit update destroy]
+  before_action :authenticate_user!
   def index
     @articles = Article.all
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+  end
 
   def new
     @article = Article.new
@@ -14,6 +17,9 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = current_user.id
+    byebug
+
     if @article.save
       @article.save
       redirect_to article_path(@article)
@@ -27,6 +33,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    @article.user_id = current_user.id
     if @article.update(article_params)
       redirect_to article_path(@article)
     else

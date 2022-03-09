@@ -10,8 +10,16 @@
         <%= form.text_field :title%>
     </div>
     <div>
+        <%= form.label :header_image%> <br>
+        <%= form.file_field :header_image%>
+    </div>
+    <div>
         <%= form.label :description%><br>
         <%= form.text_area :description%>
+    </div>
+    <div>
+        <%= form.label :uploads%> <br>
+        <%= form.file_field :uploads, multiple: true %>
     </div>
     <div>
         <%= form.submit a, data: {turbo: false}%>

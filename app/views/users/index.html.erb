@@ -1,0 +1,8 @@
+<p> Welcome to the User Admin Panel</p>
+<% @users.each do |user|%>
+<%=user.email%>
+<%=user.roles_name%>
+<%= link_to 'Edit roles', edit_user_path(user) %>
+<%= link_to 'Delete User', data:{turbo_method: :delete,
+                             turbo_confirm: "Are You Sure?"} %><br>
+<% end %>

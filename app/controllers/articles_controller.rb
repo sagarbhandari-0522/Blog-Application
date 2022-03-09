@@ -2,11 +2,14 @@
 
 class ArticlesController < ApplicationController
   before_action :find_article, only: %i[show edit update destroy]
+  before_action :authenticate_user!
   def index
     @articles = Article.all
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+  end
 
   def new
     @article = Article.new
@@ -14,6 +17,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = current_user.id
+
     if @article.save
       @article.save
       redirect_to article_path(@article)
@@ -23,10 +28,14 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    authorize @article
     render 'edit'
   end
 
   def update
+    @article.user_id = current_user.id
+    authorize @article
+
     if @article.update(article_params)
       redirect_to article_path(@article)
     else
@@ -36,13 +45,14 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
+    authorize @article
     redirect_to articles_path, status: :see_other
   end
 
   private
 
   def article_params
-    params.require(:article).permit(:title, :description)
+    params.require(:article).permit(:title, :description, :header_image, uploads: [])
   end
 
   def find_article
